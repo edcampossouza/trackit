@@ -4,6 +4,11 @@ export const ContainerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   img {
     margin-top: 60px;
     margin-bottom: 40px;
@@ -18,6 +23,9 @@ export const ContainerStyle = styled.div`
     border-radius: 5px;
     margin-bottom: 5px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   button {
     background-color: #52b6ff;
