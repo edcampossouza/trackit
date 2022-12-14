@@ -1,14 +1,10 @@
-import styled from "styled-components";
+import { PageContainer } from "../styles/PageStyle";
 import Header from "./Header";
 
 export default function Habits() {
   return (
-    <PageStyle>
+    <PageContainer>
       <Header />
-    </PageStyle>
+    </PageContainer>
   );
 }
-
-const PageStyle = styled.div`
-  padding-top: 70px;
-`;

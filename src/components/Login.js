@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { URL } from "../constants";
 import { ContainerStyle } from "../styles/AuthPages";
+import { LoginContext } from "../contexts/LoginContext";
 import Dots from "./Dots";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setUser } = useContext(LoginContext);
   const [loginInfo, setLoginInfo] = useState({ password: "", email: "" });
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +27,9 @@ export default function Login() {
     axios
       .post(`${URL}/auth/login`, loginInfo)
       .then((res) => {
-        console.log(res.data);
+        const user = res.data;
+        console.log(user);
+        setUser(user);
         setLoading(false);
         navigate("/hoje");
       })
