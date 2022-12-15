@@ -38,6 +38,8 @@ function App() {
   );
 }
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+  width: 100%;
+`;
 
 export default App;

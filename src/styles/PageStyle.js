@@ -8,4 +8,5 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 `;

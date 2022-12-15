@@ -8,10 +8,9 @@ import { URL } from "../constants";
 import styled from "styled-components";
 
 export default function Today() {
-  const { user, habits, todayHabits, setHabits, setTodayHabits } =
-    useContext(UserContext);
+  const { user, todayHabits, setTodayHabits } = useContext(UserContext);
   useEffect(() => {
-    if (user && user.token && setHabits && setTodayHabits) {
+    if (user && user.token && setTodayHabits) {
       axios
         .get(`${URL}/habits/today`, {
           headers: {
@@ -22,18 +21,8 @@ export default function Today() {
           setTodayHabits(res.data);
         })
         .catch((err) => alert(JSON.stringify(err.response.data)));
-      axios
-        .get(`${URL}/habits/`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        })
-        .then((res) => {
-          setHabits(res.data);
-        })
-        .catch((err) => alert(JSON.stringify(err.response.data)));
     }
-  }, [user, setHabits, setTodayHabits]);
+  }, [user, setTodayHabits]);
 
   function setCheck(h) {
     axios
