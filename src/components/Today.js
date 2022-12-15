@@ -19,7 +19,6 @@ export default function Today() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setTodayHabits(res.data);
         })
         .catch((err) => alert(JSON.stringify(err.response.data)));
@@ -30,14 +29,32 @@ export default function Today() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setHabits(res.data);
         })
         .catch((err) => alert(JSON.stringify(err.response.data)));
     }
   }, [user, setHabits]);
 
-  console.log(todayHabits);
+  function setCheck(h) {
+    axios
+      .post(
+        `${URL}habits/${h.id}/${h.done ? "uncheck" : "check"}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setTodayHabits(
+          todayHabits.map((hab) =>
+            h.id === hab.id ? { ...hab, done: !h.done } : { ...hab }
+          )
+        );
+      })
+      .catch((err) => alert(`Erro: ${JSON.stringify(err.response.data)}`));
+  }
   const cntDoneoneHabits = todayHabits
     ? todayHabits.filter((h) => h.done).length
     : 0;
@@ -49,20 +66,22 @@ export default function Today() {
         <DateTitle>Segunda, 17/05</DateTitle>
         <Subtitle done={cntDoneoneHabits}>
           {cntDoneoneHabits
-            ? `${(cntDoneoneHabits * 100) / cntHabits} dos hábitos concluídos`
+            ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
+                0
+              )}% dos hábitos concluídos`
             : "Nenhum hábito concluído ainda"}
         </Subtitle>
       </TitlesContainer>
       <HabitsContainer>
         {todayHabits &&
           todayHabits.map((h) => (
-            <HabitCard done={h.done}>
+            <HabitCard done={h.done} key={h.id}>
               <div>
                 <h1>{h.name}</h1>
                 <p>{`Sequência atual: ${h.currentSequence} dias`}</p>
                 <p>{`Seu recorde: ${h.highestSequence} dias`}</p>
               </div>
-              <ion-icon name="checkbox"></ion-icon>
+              <ion-icon name="checkbox" onClick={() => setCheck(h)}></ion-icon>
             </HabitCard>
           ))}
       </HabitsContainer>
@@ -75,6 +94,7 @@ export default function Today() {
 const HabitsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 25px;
   margin-top: 30px;
   width: 100%;
 `;
@@ -86,6 +106,7 @@ const HabitCard = styled.div`
   border-radius: 5px;
   display: flex;
   background-color: #ffffff;
+  margin-bottom: 10px;
   div {
     width: 70%;
     height: 100%;

@@ -6,13 +6,14 @@ import Today from "./components/Today";
 import GlobalStyle from "./styles/GlobalStyles";
 import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
+import styled from "styled-components";
 
 function App() {
   const [user, setUser] = useState({});
   const [habits, setHabits] = useState([]);
   const [todayHabits, setTodayHabits] = useState([]);
   return (
-    <div>
+    <AppContainer>
       <GlobalStyle />
       <UserContext.Provider
         value={{
@@ -33,8 +34,10 @@ function App() {
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
-    </div>
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div``;
 
 export default App;

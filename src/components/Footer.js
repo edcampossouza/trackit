@@ -33,6 +33,7 @@ const FooterStyle = styled.div`
   width: 100%;
   bottom: 0;
   display: flex;
+  background-color: #ffffff;
   justify-content: space-between;
 `;
 const ButtonRectangle = styled.button`
@@ -56,4 +57,5 @@ const ButtonCircular = styled.button`
   left: calc(50% - 45px);
   bottom: 10px;
   box-sizing: border-box;
+  opacity: 0.8;
 `;
