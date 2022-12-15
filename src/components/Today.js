@@ -33,7 +33,7 @@ export default function Today() {
         })
         .catch((err) => alert(JSON.stringify(err.response.data)));
     }
-  }, [user, setHabits]);
+  }, [user, setHabits, setTodayHabits]);
 
   function setCheck(h) {
     axios

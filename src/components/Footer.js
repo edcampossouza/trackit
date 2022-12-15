@@ -1,15 +1,19 @@
 import styled from "styled-components";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 export default function Footer() {
+  const { todayHabits } = useContext(UserContext);
+  console.log(todayHabits);
   return (
     <FooterStyle>
       <ButtonRectangle>Hábitos</ButtonRectangle>
       <ButtonCircular>
         <CircularProgressbarWithChildren
           minValue={0}
-          maxValue={10}
-          value={7}
+          maxValue={todayHabits ? todayHabits.length : 0}
+          value={todayHabits ? todayHabits.filter((h) => h.done).length : 0}
           styles={{
             root: {
               verticalAlign: "middle",
