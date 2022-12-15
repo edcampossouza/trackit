@@ -2,14 +2,17 @@ import styled from "styled-components";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
   const { todayHabits } = useContext(UserContext);
-  console.log(todayHabits);
+  const navigate = useNavigate();
   return (
     <FooterStyle>
-      <ButtonRectangle>Hábitos</ButtonRectangle>
-      <ButtonCircular>
+      <ButtonRectangle onClick={() => navigate("/habitos")}>
+        Hábitos
+      </ButtonRectangle>
+      <ButtonCircular onClick={() => navigate("/hoje")}>
         <CircularProgressbarWithChildren
           minValue={0}
           maxValue={todayHabits ? todayHabits.length : 0}
@@ -26,7 +29,9 @@ export default function Footer() {
           Hoje
         </CircularProgressbarWithChildren>
       </ButtonCircular>
-      <ButtonRectangle>Histórico</ButtonRectangle>
+      <ButtonRectangle onClick={() => navigate("/historico")}>
+        Histórico
+      </ButtonRectangle>
     </FooterStyle>
   );
 }
@@ -47,6 +52,10 @@ const ButtonRectangle = styled.button`
   font-size: 18px;
   width: 50%;
   max-width: 150px;
+  &:hover {
+    cursor: pointer;
+    background-color: #f2f2f2;
+  }
 `;
 
 const ButtonCircular = styled.button`
@@ -62,4 +71,7 @@ const ButtonCircular = styled.button`
   bottom: 10px;
   box-sizing: border-box;
   opacity: 0.8;
+  &:hover {
+    cursor: pointer;
+  }
 `;
