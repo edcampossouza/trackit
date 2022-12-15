@@ -1,4 +1,4 @@
-import { PageContainer } from "../styles/PageStyle";
+import { PageContainer, Row } from "../styles/PageStyle";
 import { UserContext } from "../contexts/UserContext";
 import Header from "./Header";
 import { useContext, useEffect } from "react";
@@ -8,21 +8,11 @@ import { URL } from "../constants";
 import styled from "styled-components";
 
 export default function Today() {
-  const { user, todayHabits, setTodayHabits } = useContext(UserContext);
+  const { user, todayHabits, setTodayHabits, fetchTodaysHabits } =
+    useContext(UserContext);
   useEffect(() => {
-    if (user && user.token && setTodayHabits) {
-      axios
-        .get(`${URL}/habits/today`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        })
-        .then((res) => {
-          setTodayHabits(res.data);
-        })
-        .catch((err) => alert(JSON.stringify(err.response.data)));
-    }
-  }, [user, setTodayHabits]);
+    fetchTodaysHabits();
+  }, []);
 
   function setCheck(h) {
     axios
@@ -44,6 +34,7 @@ export default function Today() {
       })
       .catch((err) => alert(`Erro: ${JSON.stringify(err.response.data)}`));
   }
+
   const cntDoneoneHabits = todayHabits
     ? todayHabits.filter((h) => h.done).length
     : 0;
@@ -51,29 +42,36 @@ export default function Today() {
   return (
     <PageContainer>
       <Header />
-      <TitlesContainer>
-        <DateTitle>Segunda, 17/05</DateTitle>
-        <Subtitle done={cntDoneoneHabits}>
-          {cntDoneoneHabits
-            ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
-                0
-              )}% dos hábitos concluídos`
-            : "Nenhum hábito concluído ainda"}
-        </Subtitle>
-      </TitlesContainer>
-      <HabitsContainer>
-        {todayHabits &&
-          todayHabits.map((h) => (
-            <HabitCard done={h.done} key={h.id}>
-              <div>
-                <h1>{h.name}</h1>
-                <p>{`Sequência atual: ${h.currentSequence} dias`}</p>
-                <p>{`Seu recorde: ${h.highestSequence} dias`}</p>
-              </div>
-              <ion-icon name="checkbox" onClick={() => setCheck(h)}></ion-icon>
-            </HabitCard>
-          ))}
-      </HabitsContainer>
+      <Row>
+        <TitlesContainer>
+          <DateTitle>Segunda, 17/05</DateTitle>
+          <Subtitle done={cntDoneoneHabits}>
+            {cntDoneoneHabits
+              ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
+                  0
+                )}% dos hábitos concluídos`
+              : "Nenhum hábito concluído ainda"}
+          </Subtitle>
+        </TitlesContainer>
+      </Row>
+      <Row>
+        <HabitsContainer>
+          {todayHabits &&
+            todayHabits.map((h) => (
+              <HabitCard done={h.done} key={h.id}>
+                <div>
+                  <h1>{h.name}</h1>
+                  <p>{`Sequência atual: ${h.currentSequence} dias`}</p>
+                  <p>{`Seu recorde: ${h.highestSequence} dias`}</p>
+                </div>
+                <ion-icon
+                  name="checkbox"
+                  onClick={() => setCheck(h)}
+                ></ion-icon>
+              </HabitCard>
+            ))}
+        </HabitsContainer>
+      </Row>
 
       <Footer />
     </PageContainer>

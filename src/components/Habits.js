@@ -9,32 +9,13 @@ import Footer from "./Footer";
 import Header from "./Header";
 const DOWS = ["D", "S", "T", "Q", "Q", "S", "S"];
 export default function Habits() {
-  const { user, habits, setHabits } = useContext(UserContext);
+  const { user, habits, fetchHabits, fetchTodaysHabits } =
+    useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
   useEffect(() => {
-    if (user && user.token && setHabits) {
-      fetchHabits();
-    }
-  }, [user]);
-
-  function fetchHabits() {
-    setLoading(true);
-    axios
-      .get(`${URL}/habits`, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((res) => {
-        setHabits(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        alert(JSON.stringify(err.response.data));
-        setLoading(false);
-      });
-  }
+    fetchHabits(setLoading);
+  }, []);
 
   function deleteHabit(habit) {
     axios
@@ -45,6 +26,7 @@ export default function Habits() {
       })
       .then((res) => {
         console.log(res.data);
+        fetchTodaysHabits();
         fetchHabits();
       })
       .catch((err) => {
@@ -62,7 +44,9 @@ export default function Habits() {
       .then((res) => {
         console.log(res.data);
         if (onSuccess) onSuccess();
+        setAdding(false);
         fetchHabits();
+        fetchTodaysHabits();
       })
       .catch((err) => {
         alert(JSON.stringify(err.response.data));
