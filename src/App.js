@@ -4,15 +4,26 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import Today from "./components/Today";
 import GlobalStyle from "./styles/GlobalStyles";
-import { LoginContext } from "./contexts/LoginContext";
+import { UserContext } from "./contexts/UserContext";
 import { useState } from "react";
 
 function App() {
   const [user, setUser] = useState({});
+  const [habits, setHabits] = useState([]);
+  const [todayHabits, setTodayHabits] = useState([]);
   return (
     <div>
       <GlobalStyle />
-      <LoginContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider
+        value={{
+          user,
+          setUser,
+          habits,
+          setHabits,
+          todayHabits,
+          setTodayHabits,
+        }}
+      >
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
@@ -21,7 +32,7 @@ function App() {
             <Route path="/hoje" element={<Today />} />
           </Routes>
         </BrowserRouter>
-      </LoginContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import logo from "../assets/logo.png";
-import { LoginContext } from "../contexts/LoginContext";
+import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 
 export default function Header() {
-  const { user } = useContext(LoginContext);
+  const { user } = useContext(UserContext);
 
   return (
     <HeaderStyle>
