@@ -87,8 +87,20 @@ export default function Today() {
               <HabitCard done={h.done} key={h.id}>
                 <div>
                   <h1>{h.name}</h1>
-                  <p>{`Sequência atual: ${h.currentSequence} dias`}</p>
-                  <p>{`Seu recorde: ${h.highestSequence} dias`}</p>
+                  <p>
+                    Sequência atual:&nbsp;
+                    <SequenceText highlight={h.done}>{`${
+                      h.currentSequence
+                    } dia${h.currentSequence === 1 ? "" : "s"}`}</SequenceText>
+                  </p>
+                  <p>
+                    Seu recorde:&nbsp;
+                    <SequenceText
+                      highlight={h.currentSequence === h.highestSequence}
+                    >{` ${h.highestSequence} dia${
+                      h.highestSequence === 1 ? "" : "s"
+                    }`}</SequenceText>
+                  </p>
                 </div>
                 <ion-icon
                   name="checkbox"
@@ -133,6 +145,7 @@ const HabitCard = styled.div`
     }
     p {
       font-size: 13px;
+      display: flex;
     }
   }
   ion-icon {
@@ -140,6 +153,10 @@ const HabitCard = styled.div`
     height: 100%;
     color: ${(props) => (props.done ? "#8fc549" : "#E7E7E7")};
   }
+`;
+
+const SequenceText = styled.p`
+  color: ${(props) => (props.highlight ? "#8FC549" : "#666666")};
 `;
 
 const TitlesContainer = styled.div`
