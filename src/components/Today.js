@@ -70,8 +70,8 @@ export default function Today() {
       <Header />
       <Row>
         <TitlesContainer>
-          <MainTitle>{getDate()}</MainTitle>
-          <Subtitle done={cntDoneoneHabits}>
+          <MainTitle data-test="today">{getDate()}</MainTitle>
+          <Subtitle done={cntDoneoneHabits} data-test="today-counter">
             {cntDoneoneHabits
               ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
                   0
@@ -84,16 +84,20 @@ export default function Today() {
         <HabitsContainer>
           {todayHabits &&
             todayHabits.map((h) => (
-              <HabitCard done={h.done} key={h.id}>
+              <HabitCard
+                done={h.done}
+                key={h.id}
+                data-test="today-habit-container"
+              >
                 <div>
-                  <h1>{h.name}</h1>
-                  <p>
+                  <h1 data-test="today-habit-name">{h.name}</h1>
+                  <p data-test="today-habit-sequence">
                     Sequência atual:&nbsp;
                     <SequenceText highlight={h.done}>{`${
                       h.currentSequence
                     } dia${h.currentSequence === 1 ? "" : "s"}`}</SequenceText>
                   </p>
-                  <p>
+                  <p data-test="today-habit-record">
                     Seu recorde:&nbsp;
                     <SequenceText
                       highlight={h.currentSequence === h.highestSequence}
@@ -102,10 +106,12 @@ export default function Today() {
                     }`}</SequenceText>
                   </p>
                 </div>
-                <ion-icon
-                  name="checkbox"
+                <button
                   onClick={() => setCheck(h)}
-                ></ion-icon>
+                  data-test="today-habit-check-btn"
+                >
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                </button>
               </HabitCard>
             ))}
         </HabitsContainer>
@@ -131,6 +137,7 @@ const HabitCard = styled.div`
   display: flex;
   background-color: #ffffff;
   margin-bottom: 10px;
+  align-items: center;
   div {
     width: 70%;
     height: 100%;
@@ -148,10 +155,20 @@ const HabitCard = styled.div`
       display: flex;
     }
   }
-  ion-icon {
+  button {
+    background-color: #ffffff;
     width: 20%;
-    height: 100%;
-    color: ${(props) => (props.done ? "#8fc549" : "#E7E7E7")};
+    height: 80%;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: ${(props) => (props.done ? "#8fc549" : "#E7E7E7")};
+    color: white;
+    ion-icon {
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      color: "#ffffff";
+    }
   }
 `;
 
