@@ -61,7 +61,12 @@ export default function Habits() {
       <Row>
         <TopTitle>
           <span>Meus hábitos</span>{" "}
-          <AddButton onClick={() => setAdding(!adding)}>+</AddButton>
+          <AddButton
+            onClick={() => setAdding(!adding)}
+            data-test="habit-create-btn"
+          >
+            +
+          </AddButton>
         </TopTitle>
       </Row>
       <Row hide={!adding}>
@@ -72,18 +77,19 @@ export default function Habits() {
       ) : habits && habits.length > 0 ? (
         habits.map((habit) => (
           <Row key={habit.id}>
-            <HabitCard>
+            <HabitCard data-test="habit-container">
               <Row>
-                {habit.name}
+                <span data-test="habit-name">{habit.name}</span>
                 <ion-icon
                   name="trash-outline"
                   onClick={() => deleteHabit(habit)}
+                  data-test="habit-delete-btn"
                 ></ion-icon>
               </Row>
               <Row>
                 <DaysContainer>
                   {DOWS.map((d, i) => (
-                    <DayOfWeek key={i} set={habit.days.includes(i)}>
+                    <DayOfWeek key={i} set={habit.days.includes(i)} data-test="habit-day">
                       {d}
                     </DayOfWeek>
                   ))}
@@ -239,7 +245,7 @@ function AddHabit({ setShow, onSave }) {
     setLoading(false);
   }
   return (
-    <AddHabitStyle>
+    <AddHabitStyle data-test="habit-create-container">
       <form onSubmit={submitHabit}>
         <Row>
           <input
@@ -248,6 +254,7 @@ function AddHabit({ setShow, onSave }) {
             onChange={(e) => setHabitName(e.target.value)}
             disabled={loading}
             required
+            data-test="habit-name-input"
           />
         </Row>
         <Row>
@@ -259,6 +266,7 @@ function AddHabit({ setShow, onSave }) {
                 onClick={() => setDay(i)}
                 disabled={loading}
                 type="button"
+                data-test="habit-day"
               >
                 {d}
               </DayOfWeek>
@@ -267,10 +275,16 @@ function AddHabit({ setShow, onSave }) {
         </Row>
         <Row>
           <ButtonContainer>
-            <CancelButton type="button" onClick={() => setShow(false)}>
+            <CancelButton
+              type="button"
+              onClick={() => setShow(false)}
+              data-test="habit-create-cancel-btn"
+            >
               Cancelar
             </CancelButton>
-            <MenuButton type="submit">Salvar</MenuButton>
+            <MenuButton type="submit" data-test="habit-create-save-btn">
+              Salvar
+            </MenuButton>
           </ButtonContainer>
         </Row>
       </form>
