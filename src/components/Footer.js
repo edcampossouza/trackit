@@ -8,11 +8,14 @@ export default function Footer() {
   const { todayHabits } = useContext(UserContext);
   const navigate = useNavigate();
   return (
-    <FooterStyle>
-      <ButtonRectangle onClick={() => navigate("/habitos")}>
+    <FooterStyle data-test="menu">
+      <ButtonRectangle
+        onClick={() => navigate("/habitos")}
+        data-test="habit-link"
+      >
         Hábitos
       </ButtonRectangle>
-      <ButtonCircular onClick={() => navigate("/hoje")}>
+      <ButtonCircular onClick={() => navigate("/hoje")} data-test="today">
         <CircularProgressbarWithChildren
           minValue={0}
           maxValue={todayHabits ? todayHabits.length : 0}
@@ -29,7 +32,10 @@ export default function Footer() {
           Hoje
         </CircularProgressbarWithChildren>
       </ButtonCircular>
-      <ButtonRectangle onClick={() => navigate("/historico")}>
+      <ButtonRectangle
+        onClick={() => navigate("/historico")}
+        data-test="history-link"
+      >
         Histórico
       </ButtonRectangle>
     </FooterStyle>
