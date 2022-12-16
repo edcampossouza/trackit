@@ -58,10 +58,10 @@ export default function Habits() {
     <PageContainer>
       <Header />
       <Row>
-        <DateTitle>
+        <TopTitle>
           <span>Meus hábitos</span>{" "}
           <AddButton onClick={() => setAdding(!adding)}>+</AddButton>
-        </DateTitle>
+        </TopTitle>
       </Row>
       <Row hide={!adding}>
         <AddHabit setShow={setAdding} onSave={saveHabit} />
@@ -111,10 +111,11 @@ const Row = styled.div`
   display: ${(props) => (props.hide ? "none" : "flex")};
 `;
 
-const DateTitle = styled.div`
+const TopTitle = styled.div`
   color: #126ba5;
   font-size: 23px;
   width: 100%;
+  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;

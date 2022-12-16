@@ -39,12 +39,32 @@ export default function Today() {
     ? todayHabits.filter((h) => h.done).length
     : 0;
   const cntHabits = todayHabits ? todayHabits.length : 0;
+  const weekdays = [
+    "Domingo",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado",
+  ];
+  function getDate() {
+    const date = new Date();
+    return (
+      weekdays[date.getDay()] +
+      ", " +
+      date.toLocaleDateString("pt-BR", {
+        month: "2-digit",
+        day: "2-digit",
+      })
+    );
+  }
   return (
     <PageContainer>
       <Header />
       <Row>
         <TitlesContainer>
-          <DateTitle>Segunda, 17/05</DateTitle>
+          <DateTitle>{getDate()}</DateTitle>
           <Subtitle done={cntDoneoneHabits}>
             {cntDoneoneHabits
               ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
@@ -81,7 +101,6 @@ export default function Today() {
 const HabitsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 25px;
   margin-top: 30px;
   width: 100%;
 `;
@@ -119,11 +138,12 @@ const HabitCard = styled.div`
 
 const TitlesContainer = styled.div`
   width: 100%;
-  padding-left: 20px;
+  padding-left: 5px;
 `;
 const DateTitle = styled.div`
   color: #126ba5;
   font-size: 23px;
+  margin-bottom: 5px;
 `;
 const Subtitle = styled.div`
   color: ${(props) => (props.done > 0 ? "#8FC549" : "#BABABA")};
