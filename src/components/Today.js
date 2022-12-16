@@ -1,20 +1,22 @@
 import { PageContainer, Row } from "../styles/PageStyle";
 import { UserContext } from "../contexts/UserContext";
 import Header from "./Header";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Footer from "./Footer";
 import axios from "axios";
 import { URL } from "../constants";
 import styled from "styled-components";
-
 export default function Today() {
   const { user, todayHabits, setTodayHabits, fetchTodaysHabits } =
     useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchTodaysHabits();
   }, []);
 
   function setCheck(h) {
+    if (loading) return;
+    setLoading(true);
     axios
       .post(
         `${URL}habits/${h.id}/${h.done ? "uncheck" : "check"}`,
@@ -31,8 +33,12 @@ export default function Today() {
             h.id === hab.id ? { ...hab, done: !h.done } : { ...hab }
           )
         );
+        setLoading(false);
       })
-      .catch((err) => alert(`Erro: ${JSON.stringify(err.response.data)}`));
+      .catch((err) => {
+        alert(`Erro: ${JSON.stringify(err.response.data)}`);
+        setLoading(false);
+      });
   }
 
   const cntDoneoneHabits = todayHabits
