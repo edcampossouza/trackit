@@ -51,6 +51,7 @@ export default function Login() {
           required
           onChange={onChange}
           disabled={loading}
+          data-test="email-input"
         />
         <input
           placeholder="senha"
@@ -60,10 +61,15 @@ export default function Login() {
           required
           onChange={onChange}
           disabled={loading}
+          data-test="password-input"
         />
-        <button type="submit">{loading ? <Dots /> : "Entrar"}</button>
+        <button data-test="login-btn" type="submit">
+          {loading ? <Dots /> : "Entrar"}
+        </button>
       </form>
-      <a href="/cadastro">Não tem uma conta? Cadastre-se!</a>
+      <a data-test="signup-link" href="/cadastro">
+        Não tem uma conta? Cadastre-se!
+      </a>
     </ContainerStyle>
   );
 }
