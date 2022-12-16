@@ -1,4 +1,4 @@
-import { PageContainer, Row } from "../styles/PageStyle";
+import { PageContainer, Row, MainTitle } from "../styles/PageStyle";
 import { UserContext } from "../contexts/UserContext";
 import Header from "./Header";
 import { useContext, useEffect, useState } from "react";
@@ -70,7 +70,7 @@ export default function Today() {
       <Header />
       <Row>
         <TitlesContainer>
-          <DateTitle>{getDate()}</DateTitle>
+          <MainTitle>{getDate()}</MainTitle>
           <Subtitle done={cntDoneoneHabits}>
             {cntDoneoneHabits
               ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
@@ -146,11 +146,7 @@ const TitlesContainer = styled.div`
   width: 100%;
   padding-left: 5px;
 `;
-const DateTitle = styled.div`
-  color: #126ba5;
-  font-size: 23px;
-  margin-bottom: 5px;
-`;
+
 const Subtitle = styled.div`
   color: ${(props) => (props.done > 0 ? "#8FC549" : "#BABABA")};
   font-size: 18px;

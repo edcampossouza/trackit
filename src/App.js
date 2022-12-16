@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Signin from "./components/Signin";
 import Today from "./components/Today";
 import GlobalStyle from "./styles/GlobalStyles";
+import History from "./components/History";
 import { fetchTodaysHabits, fetchHabits } from "./data-fetch/data-fetch";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/cadastro" element={<Signin />} />
             <Route path="/habitos" element={<Habits />} />
             <Route path="/hoje" element={<Today />} />
+            <Route path="/historico" element={<History />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

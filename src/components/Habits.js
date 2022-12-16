@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { URL } from "../constants";
 import { UserContext } from "../contexts/UserContext";
-import { PageContainer } from "../styles/PageStyle";
+import { PageContainer, SubTitle } from "../styles/PageStyle";
 import Dots from "./Dots";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -92,10 +92,10 @@ export default function Habits() {
           </Row>
         ))
       ) : (
-        <NoHabits>
+        <SubTitle>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
           começar a trackear!
-        </NoHabits>
+        </SubTitle>
       )}
       <Footer />
     </PageContainer>
@@ -132,11 +132,6 @@ const AddButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const NoHabits = styled(Row)`
-  font-size: 18px;
-  color: #666666;
 `;
 
 const HabitCard = styled.div`

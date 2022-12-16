@@ -19,3 +19,14 @@ export const Row = styled.div`
   margin-bottom: 10px;
   display: ${(props) => (props.hide ? "none" : "flex")};
 `;
+
+export const MainTitle = styled.div`
+  color: #126ba5;
+  font-size: 23px;
+  margin-bottom: 5px;
+`;
+
+export const SubTitle = styled(Row)`
+  font-size: 18px;
+  color: #666666;
+`;
