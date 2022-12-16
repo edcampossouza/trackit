@@ -18,6 +18,7 @@ export default function Habits() {
   }, []);
 
   function deleteHabit(habit) {
+    if (!window.confirm("Gostaria realmente de apagar o hábito?")) return;
     axios
       .delete(`${URL}habits/${habit.id}`, {
         headers: {
