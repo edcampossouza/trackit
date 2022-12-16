@@ -50,6 +50,7 @@ export default function Signin() {
           required
           disabled={loading}
           onChange={onChange}
+          data-test="email-input"
         />
         <input
           placeholder="senha"
@@ -59,6 +60,7 @@ export default function Signin() {
           required
           disabled={loading}
           onChange={onChange}
+          data-test="password-input"
         />
         <input
           placeholder="nome"
@@ -67,6 +69,7 @@ export default function Signin() {
           required
           disabled={loading}
           onChange={onChange}
+          data-test="user-name-input"
         />
         <input
           placeholder="foto"
@@ -75,9 +78,14 @@ export default function Signin() {
           required
           disabled={loading}
           onChange={onChange}
+          data-test="user-image-input"
         />
-        <button type="submit">{loading ? <Dots /> : "Cadastrar"}</button>
-        <a href="/">Já tem uma conta? Faça login!</a>
+        <button data-test="signup-btn" type="submit">
+          {loading ? <Dots /> : "Cadastrar"}
+        </button>
+        <a data-test="login-link" href="/">
+          Já tem uma conta? Faça login!
+        </a>
       </form>
     </ContainerStyle>
   );
