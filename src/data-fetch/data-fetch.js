@@ -1,8 +1,9 @@
 import axios from "axios";
 import { URL } from "../constants";
 
-export function fetchTodaysHabits(user, setTodayHabits) {
+export function fetchTodaysHabits(user, setTodayHabits, setLoading) {
   if (user && user.token && setTodayHabits) {
+    if (setLoading) setLoading(true);
     axios
       .get(`${URL}/habits/today`, {
         headers: {
@@ -11,8 +12,12 @@ export function fetchTodaysHabits(user, setTodayHabits) {
       })
       .then((res) => {
         setTodayHabits(res.data);
+        if (setLoading) setLoading(false);
       })
-      .catch((err) => alert(JSON.stringify(err.response.data)));
+      .catch((err) => {
+        alert(JSON.stringify(err.response.data));
+        if (setLoading) setLoading(false);
+      });
   }
 }
 
