@@ -34,6 +34,7 @@ export default function Today() {
           )
         );
         setLoading(false);
+        fetchTodaysHabits(setLoading);
       })
       .catch((err) => {
         alert(`Erro: ${JSON.stringify(err.response.data)}`);
