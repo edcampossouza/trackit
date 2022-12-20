@@ -24,13 +24,13 @@ export default function Login() {
   function userLogin(e) {
     e.preventDefault();
     setLoading(true);
+    navigate("/hoje");
     axios
       .post(`${URL}/auth/login`, loginInfo)
       .then((res) => {
         const user = res.data;
         setUser(user);
         setLoading(false);
-        navigate("/hoje");
       })
       .catch((err) => {
         const msg =
@@ -63,7 +63,7 @@ export default function Login() {
           disabled={loading}
           data-test="password-input"
         />
-        <button data-test="login-btn" type="submit">
+        <button data-test="login-btn" type="submit" disabled={loading}>
           {loading ? <Dots /> : "Entrar"}
         </button>
       </form>
