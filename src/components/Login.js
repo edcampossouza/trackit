@@ -30,7 +30,6 @@ export default function Login() {
         const user = res.data;
         setUser(user);
         navigate("/hoje");
-        setLoading(false);
       })
       .catch((err) => {
         const msg =

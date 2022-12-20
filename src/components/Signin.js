@@ -23,7 +23,6 @@ export default function Signin() {
 
       .then((res) => {
         navigate("/");
-        setLoading(false);
       })
       .catch((err) => {
         const msg =
