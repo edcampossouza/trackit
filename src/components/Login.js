@@ -24,12 +24,12 @@ export default function Login() {
   function userLogin(e) {
     e.preventDefault();
     setLoading(true);
-    navigate("/hoje");
     axios
       .post(`${URL}/auth/login`, loginInfo)
       .then((res) => {
         const user = res.data;
         setUser(user);
+        navigate("/hoje");
         setLoading(false);
       })
       .catch((err) => {
