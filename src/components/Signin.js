@@ -19,7 +19,7 @@ export default function Signin() {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(`${URL}/auth/sign-up`, userInfo)
+      .post(`${URL}auth/sign-up`, userInfo)
 
       .then((res) => {
         navigate("/");
