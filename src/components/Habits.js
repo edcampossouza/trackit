@@ -89,7 +89,11 @@ export default function Habits() {
               <Row>
                 <DaysContainer>
                   {DOWS.map((d, i) => (
-                    <DayOfWeek key={i} set={habit.days.includes(i)} data-test="habit-day">
+                    <DayOfWeek
+                      key={i}
+                      set={habit.days.includes(i)}
+                      data-test="habit-day"
+                    >
                       {d}
                     </DayOfWeek>
                   ))}
@@ -253,7 +257,6 @@ function AddHabit({ setShow, onSave }) {
             value={habitName}
             onChange={(e) => setHabitName(e.target.value)}
             disabled={loading}
-            required
             data-test="habit-name-input"
           />
         </Row>
