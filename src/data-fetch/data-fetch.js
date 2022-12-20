@@ -5,7 +5,7 @@ export function fetchTodaysHabits(user, setTodayHabits, setLoading) {
   if (user && user.token && setTodayHabits) {
     if (setLoading) setLoading(true);
     axios
-      .get(`${URL}/habits/today`, {
+      .get(`${URL}habits/today`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -24,7 +24,7 @@ export function fetchTodaysHabits(user, setTodayHabits, setLoading) {
 export function fetchHabits(user, setHabits, setLoading) {
   if (setLoading) setLoading(true);
   axios
-    .get(`${URL}/habits`, {
+    .get(`${URL}habits`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

@@ -25,7 +25,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(`${URL}/auth/login`, loginInfo)
+      .post(`${URL}auth/login`, loginInfo)
       .then((res) => {
         const user = res.data;
         setUser(user);
