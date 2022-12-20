@@ -79,7 +79,7 @@ export default function Signin() {
           onChange={onChange}
           data-test="user-image-input"
         />
-        <button data-test="signup-btn" type="submit">
+        <button data-test="signup-btn" type="submit" disabled={loading}>
           {loading ? <Dots /> : "Cadastrar"}
         </button>
         <a data-test="login-link" href="/">
