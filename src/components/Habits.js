@@ -282,10 +282,15 @@ function AddHabit({ setShow, onSave }) {
               type="button"
               onClick={() => setShow(false)}
               data-test="habit-create-cancel-btn"
+              disabled={loading}
             >
               Cancelar
             </CancelButton>
-            <MenuButton type="submit" data-test="habit-create-save-btn">
+            <MenuButton
+              type="submit"
+              data-test="habit-create-save-btn"
+              disabled={loading}
+            >
               Salvar
             </MenuButton>
           </ButtonContainer>
