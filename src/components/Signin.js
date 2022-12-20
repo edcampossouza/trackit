@@ -18,10 +18,13 @@ export default function Signin() {
   function userSignIn(e) {
     e.preventDefault();
     setLoading(true);
-    navigate("/");
     axios
       .post(`${URL}/auth/sign-up`, userInfo)
-      .then((res) => {})
+
+      .then((res) => {
+        navigate("/");
+        setLoading(false);
+      })
       .catch((err) => {
         const msg =
           err.response.data.message || JSON.stringify(err.response.data);
