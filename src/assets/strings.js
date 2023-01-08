@@ -36,7 +36,7 @@ export const pt = {
 };
 
 export const en = {
-  LOCALE_STRING: "pt-BR",
+  LOCALE_STRING: "en",
   PASSWORD: "password",
   LOGIN_BTN: "Login",
   SIGNUP_LINK: "Don't have an account? Sign up!",
