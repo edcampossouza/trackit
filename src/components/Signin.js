@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { URL } from "../constants";
 import { ContainerStyle } from "../styles/AuthPages";
@@ -88,9 +88,9 @@ export default function Signin() {
         <button data-test="signup-btn" type="submit" disabled={loading}>
           {loading ? <Dots /> : lang.SIGNUP_BTN}
         </button>
-        <a data-test="login-link" href="/">
-          {lang.LOGIN_LINK}
-        </a>
+        <Link to="/">
+          <a data-test="login-link">{lang.LOGIN_LINK}</a>
+        </Link>
       </form>
     </ContainerStyle>
   );
