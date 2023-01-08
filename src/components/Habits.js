@@ -7,18 +7,18 @@ import { PageContainer, SubTitle } from "../styles/PageStyle";
 import Dots from "./Dots";
 import Footer from "./Footer";
 import Header from "./Header";
-const DOWS = ["D", "S", "T", "Q", "Q", "S", "S"];
 export default function Habits() {
-  const { user, habits, fetchHabits, fetchTodaysHabits } =
+  const { user, habits, fetchHabits, fetchTodaysHabits, lang } =
     useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
+  const DOWS = lang.DOWS;
   useEffect(() => {
     fetchHabits(setLoading);
   }, []);
 
   function deleteHabit(habit) {
-    if (!window.confirm("Gostaria realmente de apagar o hábito?")) return;
+    if (!window.confirm(lang.HABIT_CANCEL_CONFIRM)) return;
     axios
       .delete(`${URL}habits/${habit.id}`, {
         headers: {
@@ -60,7 +60,7 @@ export default function Habits() {
       <Header />
       <Row>
         <TopTitle>
-          <span>Meus hábitos</span>{" "}
+          <span>{lang.MY_HABITS}</span>{" "}
           <AddButton
             onClick={() => setAdding(!adding)}
             data-test="habit-create-btn"
@@ -103,10 +103,7 @@ export default function Habits() {
           </Row>
         ))
       ) : (
-        <SubTitle>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </SubTitle>
+        <SubTitle>{lang.YOU_HAVE_NO_HABITS}</SubTitle>
       )}
       <Footer />
     </PageContainer>
@@ -222,6 +219,8 @@ function AddHabit({ setShow, onSave }) {
   const [habitName, setHabitName] = useState("");
   const [habitDays, setHabitDays] = useState([]);
   const [loading, setLoading] = useState(false);
+  const {lang} = useContext(UserContext)
+  const DOWS = lang.DOWS;
   function setDay(index) {
     const newState = habitDays.includes(index)
       ? habitDays.filter((d) => d !== index)
@@ -253,7 +252,7 @@ function AddHabit({ setShow, onSave }) {
       <form onSubmit={submitHabit}>
         <Row>
           <input
-            placeholder="nome do hábito"
+            placeholder={lang.HABIT_NAME}
             value={habitName}
             onChange={(e) => setHabitName(e.target.value)}
             disabled={loading}
@@ -284,14 +283,14 @@ function AddHabit({ setShow, onSave }) {
               data-test="habit-create-cancel-btn"
               disabled={loading}
             >
-              Cancelar
+              {lang.CANCEL}
             </CancelButton>
             <MenuButton
               type="submit"
               data-test="habit-create-save-btn"
               disabled={loading}
             >
-              Salvar
+              {lang.SAVE}
             </MenuButton>
           </ButtonContainer>
         </Row>

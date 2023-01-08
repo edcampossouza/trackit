@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
-  const { todayHabits } = useContext(UserContext);
+  const { todayHabits, lang } = useContext(UserContext);
   const navigate = useNavigate();
   return (
     <FooterStyle data-test="menu">
@@ -13,7 +13,7 @@ export default function Footer() {
         onClick={() => navigate("/habitos")}
         data-test="habit-link"
       >
-        Hábitos
+        {lang.HABITS}
       </ButtonRectangle>
       <ButtonCircular onClick={() => navigate("/hoje")} data-test="today">
         <CircularProgressbarWithChildren
@@ -29,14 +29,14 @@ export default function Footer() {
             },
           }}
         >
-          Hoje
+          {lang.TODAY}
         </CircularProgressbarWithChildren>
       </ButtonCircular>
       <ButtonRectangle
         onClick={() => navigate("/historico")}
         data-test="history-link"
       >
-        Histórico
+        {lang.HISTORY}
       </ButtonRectangle>
     </FooterStyle>
   );

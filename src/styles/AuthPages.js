@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LangOption, LangsContainer } from "../components/LanguageOptions";
 
 export const ContainerStyle = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const ContainerStyle = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  img {
+  > img {
     margin-top: 60px;
     margin-bottom: 40px;
     width: 180px;
@@ -51,6 +52,12 @@ export const ContainerStyle = styled.div`
     &:hover {
       text-decoration: underline;
       cursor: pointer;
+    }
+  }
+  ${LangsContainer} {
+    margin-top: 20px;
+    ${LangOption} {
+      color: #0f0f0f;
     }
   }
 `;

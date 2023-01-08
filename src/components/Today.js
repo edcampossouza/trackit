@@ -7,7 +7,7 @@ import axios from "axios";
 import { URL } from "../constants";
 import styled from "styled-components";
 export default function Today() {
-  const { user, todayHabits, setTodayHabits, fetchTodaysHabits } =
+  const { user, todayHabits, setTodayHabits, fetchTodaysHabits, lang } =
     useContext(UserContext);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -47,23 +47,20 @@ export default function Today() {
     : 0;
   const cntHabits = todayHabits ? todayHabits.length : 0;
   const weekdays = [
-    "Domingo",
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sábado",
+    lang.SUNDAY,
+    lang.MONDAY,
+    lang.TUESDAY,
+    lang.WEDNESDAY,
+    lang.THURSDAY,
+    lang.FRIDAY,
+    lang.SATURDAY,
   ];
   function getDate() {
     const date = new Date();
     return (
       weekdays[date.getDay()] +
       ", " +
-      date.toLocaleDateString("pt-BR", {
-        month: "2-digit",
-        day: "2-digit",
-      })
+      date.toLocaleDateString(lang.LOCALE_STRING)
     );
   }
   return (
@@ -76,8 +73,8 @@ export default function Today() {
             {cntDoneoneHabits
               ? `${((cntDoneoneHabits * 100) / cntHabits).toFixed(
                   0
-                )}% dos hábitos concluídos`
-              : "Nenhum hábito concluído ainda"}
+                )}% ${lang.OF_HABITS_COMPLETED}`
+              : lang.NO_HABITS_COMPLETED}
           </Subtitle>
         </TitlesContainer>
       </Row>
@@ -93,17 +90,17 @@ export default function Today() {
                 <div>
                   <h1 data-test="today-habit-name">{h.name}</h1>
                   <p data-test="today-habit-sequence">
-                    Sequência atual:&nbsp;
+                    {lang.CURRENT_SEQUENCE}:&nbsp;
                     <SequenceText highlight={h.done}>{`${
                       h.currentSequence
-                    } dia${h.currentSequence === 1 ? "" : "s"}`}</SequenceText>
+                    } ${h.currentSequence === 1 ? lang.DAY : lang.DAYS}`}</SequenceText>
                   </p>
                   <p data-test="today-habit-record">
                     Seu recorde:&nbsp;
                     <SequenceText
                       highlight={h.currentSequence === h.highestSequence}
-                    >{` ${h.highestSequence} dia${
-                      h.highestSequence === 1 ? "" : "s"
+                    >{` ${h.highestSequence} ${
+                      h.highestSequence === 1 ? lang.DAY : lang.DAYS
                     }`}</SequenceText>
                   </p>
                 </div>

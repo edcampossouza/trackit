@@ -9,11 +9,13 @@ import Today from "./components/Today";
 import GlobalStyle from "./styles/GlobalStyles";
 import History from "./components/History";
 import { fetchTodaysHabits, fetchHabits } from "./data-fetch/data-fetch";
+import { en, pt } from "./assets/strings";
 
 function App() {
   const [user, setUser] = useState({});
   const [habits, setHabits] = useState([]);
   const [todayHabits, setTodayHabits] = useState([]);
+  const [lang, setLang] = useState(en);
 
   return (
     <AppContainer>
@@ -25,6 +27,9 @@ function App() {
           habits,
           setHabits,
           todayHabits,
+          lang,
+          useEn: () => setLang(en),
+          usePt: () => setLang(pt),
           setTodayHabits,
           fetchTodaysHabits: () => fetchTodaysHabits(user, setTodayHabits),
           fetchHabits: (setLoading) => fetchHabits(user, setHabits, setLoading),

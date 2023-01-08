@@ -1,13 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { URL } from "../constants";
 import { ContainerStyle } from "../styles/AuthPages";
 import Dots from "./Dots";
+import { UserContext } from "../contexts/UserContext";
+import LanguageOptions from "./LanguageOptions";
 
 export default function Signin() {
   const navigate = useNavigate();
+  const { lang } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -41,8 +44,9 @@ export default function Signin() {
   }
   return (
     <ContainerStyle>
+      <LanguageOptions />
+      <img src={logo} alt="site-logo" />
       <form onSubmit={userSignIn}>
-        <img src={logo} alt="site-logo" />
         <input
           placeholder="email"
           name="email"
@@ -54,7 +58,7 @@ export default function Signin() {
           data-test="email-input"
         />
         <input
-          placeholder="senha"
+          placeholder={lang.PASSWORD}
           name="password"
           value={userInfo.password}
           type="password"
@@ -64,7 +68,7 @@ export default function Signin() {
           data-test="password-input"
         />
         <input
-          placeholder="nome"
+          placeholder={lang.NAME}
           name="name"
           value={userInfo.name}
           required
@@ -73,7 +77,7 @@ export default function Signin() {
           data-test="user-name-input"
         />
         <input
-          placeholder="foto"
+          placeholder={lang.PICTURE}
           name="image"
           value={userInfo.image}
           required
@@ -82,10 +86,10 @@ export default function Signin() {
           data-test="user-image-input"
         />
         <button data-test="signup-btn" type="submit" disabled={loading}>
-          {loading ? <Dots /> : "Cadastrar"}
+          {loading ? <Dots /> : lang.SIGNUP_BTN}
         </button>
         <a data-test="login-link" href="/">
-          Já tem uma conta? Faça login!
+          {lang.LOGIN_LINK}
         </a>
       </form>
     </ContainerStyle>

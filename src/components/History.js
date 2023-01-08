@@ -1,17 +1,20 @@
 import { MainTitle, PageContainer, Row, SubTitle } from "../styles/PageStyle";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 import Footer from "./Footer";
 import Header from "./Header";
 
 export default function History() {
+  const {lang} = useContext(UserContext)
   return (
     <PageContainer>
       <Header />
       <Row>
-        <MainTitle>Histórico</MainTitle>
+        <MainTitle>{lang.HISTORY}</MainTitle>
       </Row>
       <Row>
         <SubTitle>
-          Em breve você poderá ver o histórico dos seus hábitos aqui!
+          {lang.HISTORY_PLACEHOLDER}
         </SubTitle>
       </Row>
       <Footer />

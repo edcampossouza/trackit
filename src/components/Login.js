@@ -5,11 +5,12 @@ import logo from "../assets/logo.png";
 import { URL } from "../constants";
 import { ContainerStyle } from "../styles/AuthPages";
 import { UserContext } from "../contexts/UserContext";
+import LanguageOptions from "./LanguageOptions";
 import Dots from "./Dots";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { setUser, lang } = useContext(UserContext);
   const [loginInfo, setLoginInfo] = useState({ password: "", email: "" });
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +41,7 @@ export default function Login() {
   }
   return (
     <ContainerStyle>
+      <LanguageOptions />
       <img src={logo} alt="site-logo" />
       <form onSubmit={userLogin}>
         <input
@@ -53,7 +55,7 @@ export default function Login() {
           data-test="email-input"
         />
         <input
-          placeholder="senha"
+          placeholder={lang.PASSWORD}
           name="password"
           value={loginInfo.password}
           type="password"
@@ -63,11 +65,11 @@ export default function Login() {
           data-test="password-input"
         />
         <button data-test="login-btn" type="submit" disabled={loading}>
-          {loading ? <Dots /> : "Entrar"}
+          {loading ? <Dots /> : lang.LOGIN_BTN}
         </button>
       </form>
       <a data-test="signup-link" href="/cadastro">
-        Não tem uma conta? Cadastre-se!
+        {lang.SIGNUP_LINK}
       </a>
     </ContainerStyle>
   );

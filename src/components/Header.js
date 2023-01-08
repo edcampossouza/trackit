@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import LanguageOptions from "./LanguageOptions";
 
 export default function Header() {
   const { user } = useContext(UserContext);
@@ -8,6 +9,7 @@ export default function Header() {
   return (
     <HeaderStyle data-test="header">
       <span>TrackIt</span>
+      <LanguageOptions />
       <img src={user.image} alt="user-avatar" />
     </HeaderStyle>
   );
@@ -31,7 +33,7 @@ const HeaderStyle = styled.div`
 
   box-sizing: border-box;
 
-  img {
+  > img {
     height: 50px;
     width: 50px;
     border-radius: 25px;
