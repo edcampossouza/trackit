@@ -96,7 +96,7 @@ export default function Today() {
                     } ${h.currentSequence === 1 ? lang.DAY : lang.DAYS}`}</SequenceText>
                   </p>
                   <p data-test="today-habit-record">
-                    Seu recorde:&nbsp;
+                    {lang.YOUR_RECORD}&nbsp;
                     <SequenceText
                       highlight={h.currentSequence === h.highestSequence}
                     >{` ${h.highestSequence} ${
